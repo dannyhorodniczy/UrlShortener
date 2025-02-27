@@ -1,0 +1,26 @@
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=postgres_user
+      - POSTGRES_PASSWORD=postgres_password
+    ports:
+      - "5432:5432"
+    restart: on-failure
+    networks:
+      - testnetwork
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4:latest
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=pgadmin@email.com
+      - PGADMIN_DEFAULT_PASSWORD=pgadmin_password
+    ports:
+      - "5050:80"
+    restart: on-failure
+    networks:
+      - testnetwork
+networks:
+  testnetwork:
+    driver: bridge
